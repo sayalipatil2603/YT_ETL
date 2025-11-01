@@ -128,10 +128,10 @@ if __name__ == "__main__": #is to make sure that some code only runs when you ru
     video_data = extract_video_data(video_ids)
     save_to_json(video_data)
 
-'''encoding="utf-8" ensures Unicode characters (like emojis, special characters) are handled correctly.
-        with → a context manager that automatically closes the file after writing.
-        json_outfile → a file object we can write to '''
-'''extracted_data → the Python object to convert to JSON.
-        json_outfile → the file to write the JSON string into.
-        indent=4 → pretty-print with 4 spaces per level.
-        ensure_ascii=False → keeps Unicode characters intact (doesnt escape them as \uXXXX).'''    
+#encoding="utf-8" ensures Unicode characters (like emojis, special characters) are handled correctly.
+#with → a context manager that automatically closes the file after writing.
+#json_outfile → a file object we can write to 
+#extracted_data → the Python object to convert to JSON.
+#json_outfile → the file to write the JSON string into.
+#indent=4 → pretty-print with 4 spaces per level.
+#ensure_ascii=False → keeps Unicode characters intact (doesnt escape them as \uXXXX).  
