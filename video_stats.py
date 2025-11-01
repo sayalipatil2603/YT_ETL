@@ -2,6 +2,7 @@ import requests  #Python libraries for making HTTP requests
 import json  #Built-in Python module that lets you work with JSON data (like API responses).
 import os
 from dotenv import load_dotenv  
+from datetime import date
 
 load_dotenv(dotenv_path="./.env")  #loads data from .env
 
@@ -112,9 +113,25 @@ def extract_video_data(video_ids):
         return extracted_data
 
     except requests.exceptions.RequestException as e:
-        raise e  
+        raise e 
+
+def save_to_json(extracted_data):
+    file_path = f"./data/YT_data_{date.today()}.json"   #the folder where the file will be saved (relative to your current working directory).YT_data_{date.today()}.json → the file name, which includes today’s date
+
+    with open(file_path, "w", encoding="utf-8") as json_outfile:   #Opens the file at file_path in write mode ("w")
+        json.dump(extracted_data, json_outfile, indent=4, ensure_ascii=False)
+        
 
 if __name__ == "__main__": #is to make sure that some code only runs when you run the file directly,and does not run when the file is imported into another file.
     playlist_id = get_playlist_id()
     video_ids = get_video_ids(playlist_id)
-    extract_video_data(video_ids)
+    video_data = extract_video_data(video_ids)
+    save_to_json(video_data)
+
+'''encoding="utf-8" ensures Unicode characters (like emojis, special characters) are handled correctly.
+        with → a context manager that automatically closes the file after writing.
+        json_outfile → a file object we can write to '''
+'''extracted_data → the Python object to convert to JSON.
+        json_outfile → the file to write the JSON string into.
+        indent=4 → pretty-print with 4 spaces per level.
+        ensure_ascii=False → keeps Unicode characters intact (doesnt escape them as \uXXXX).'''    
