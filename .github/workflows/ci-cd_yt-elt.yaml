@@ -24,6 +24,7 @@ jobs:
                     Dockerfile
                     requirements.txt
             #if the Dockerfile or requirements.txt is changed then reuild the docker image
+            #github.event_name == 'workflow_dispatch' this is for manual triggering
             - name: Set up Docker Buildx
               if: steps.changed-files-build.outputs.any_changed == 'true' || github.event_name == 'workflow_dispatch'
               uses: docker/setup-buildx-action@v3
