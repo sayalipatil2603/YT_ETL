@@ -37,12 +37,12 @@ jobs:
             - name: Build and push Docker image
               if: steps.changed-files-build.outputs.any_changed == 'true' || github.event_name == 'workflow_dispatch' #if there are any changes then only push
               run: |
-                      docker buildx build --push \
-                        --tag ${{ vars.DOCKERHUB_NAMESPACE }}/${{ vars.DOCKERHUB_REPOSITORY }}:latest \
-                        --tag ${{ vars.DOCKERHUB_NAMESPACE }}/${{ vars.DOCKERHUB_REPOSITORY }}:${{ github.sha }} \
-                        .
-                    #ensures each image has a unique tag corresponding to the exact commit.
-                    # . This is the build context — i.e., the current folder contains your Dockerfile and all necessary files for the image.
+                docker buildx build --push \
+                  --tag ${{ vars.DOCKERHUB_NAMESPACE }}/${{ vars.DOCKERHUB_REPOSITORY }}:latest \
+                  --tag ${{ vars.DOCKERHUB_NAMESPACE }}/${{ vars.DOCKERHUB_REPOSITORY }}:${{ github.sha }} \
+                  .
+              #ensures each image has a unique tag corresponding to the exact commit.
+              # . This is the build context — i.e., the current folder contains your Dockerfile and all necessary files for the image.
     unit-and-integration-and-e2e-tests:
       runs-on: ubuntu-latest
       needs: build-and-push-image #defining the dependencies, the build and push should execute first
