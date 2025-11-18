@@ -39,7 +39,7 @@ jobs:
               run: |
                       docker buildx build --push \
                         --tag ${{ vars.DOCKERHUB_NAMESPACE }}/${{ vars.DOCKERHUB_REPOSITORY }}:latest \
-                        --tag ${{ vars.DOCKERHUB_NAMESPACE }}/${{ vars.DOCKERHUB_REPOSITORY }}:${{ github.sha }} \ 
+                        --tag ${{ vars.DOCKERHUB_NAMESPACE }}/${{ vars.DOCKERHUB_REPOSITORY }}:${{ github.sha }} \
                         .
                     #ensures each image has a unique tag corresponding to the exact commit.
                     # . This is the build context — i.e., the current folder contains your Dockerfile and all necessary files for the image.
